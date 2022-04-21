@@ -1,0 +1,30 @@
+<div >
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date of birth</th>
+                <th scope="col">Age</th>
+                <th scope="col">Edit Record</th>
+                <th scope="col">Delete Record</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.email}}</td>
+                <td>{{student.dob}}</td>
+                <td>{{student.age}}</td>
+                <td><button [routerLink]="'/edit/' + student.id" class="btn btn-primary" >Edit</button></td>
+                <td><button (click)="deleteStudent(student.id!)" class="btn btn-danger">Delete</button></td>
+            </tr>
+        </tbody>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <button (click)="fetchMore()">Load More data</button>
+    </table>
+</div>
+
+
