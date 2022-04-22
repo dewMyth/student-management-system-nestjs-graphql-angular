@@ -50,13 +50,14 @@
             <hr />
             <div class="container">
                 <label for="name"><strong>Student Name</strong></label><br>
-                <input type="text" [ngModel]="name" name="name" required><br>
+                <input type="text" [(ngModel)]="name" name="name" required><br>
                 <label for="email"><strong>Student Email</strong></label><br>
-                <input type="text" [ngModel]="email" name="email" required><br>
-                <label for="age"><strong>Student Age</strong></label><br>
-                <input type="text" [ngModel]="age" name="age" required><br>
+                <input type="text" [(ngModel)]="email" name="email" required><br>
+                <!-- <label for="age"><strong>Student Age</strong></label><br>
+                <input type="text" [(ngModel)]="age" name="age" required><br> -->
             </div>
             <button type="submit" (click)="editStudent()">Edit</button>
+            <button type="button" class="btn btn-primary" type="reset">Clear</button>
             </div>
     </form>
 </body>

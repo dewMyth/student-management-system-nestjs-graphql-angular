@@ -31,14 +31,11 @@ export const GET_STUDENT = gql`
 // `;
 
 export const UPDATE_STUDENT = gql`
-  mutation ($id: Int!, $name: String!, $email: String!, $age: Int!) {
-    updateStudent(
-      updateInput: { id: $id, name: $name, email: $email, age: $age }
-    ) {
+  mutation ($id: Int!, $name: String!, $email: String!) {
+    updateStudent(updateInput: { id: $id, name: $name, email: $email }) {
       id
       name
       email
-      age
     }
   }
 `;
@@ -72,14 +69,10 @@ export class EditComponent implements OnInit {
       fetchPolicy: 'no-cache',
     });
 
-    console.log(this.query);
-
     this.query.valueChanges.subscribe(({ data }) => {
-      console.log(data);
       this.data = data;
       this.email = this.data.getStudent.email;
       this.name = this.data.getStudent.name;
-      this.age = this.data.getStudent.age;
     });
   }
 
@@ -88,16 +81,19 @@ export class EditComponent implements OnInit {
       let id = this.id;
       let name = this.name;
       let email = this.email;
-      let age = this.age;
+
+      console.log({ id, name, email });
 
       this.apollo
         .mutate<any>({
           mutation: UPDATE_STUDENT,
-          variables: { id, name, email, age },
+          variables: { id, name, email },
           fetchPolicy: 'no-cache',
         })
         .subscribe(({ data }) => {
-          if (data != null) {
+          console.log(data);
+          if (data) {
+            console.log(data);
             alert('Data Updated Suceesfully!');
             window.location.href = './students';
           }
